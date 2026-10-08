@@ -6,6 +6,8 @@ Built for the [PayPal AI Hackathon: Build what's next with PayPal and AI](https:
 
 Tell the agent what you want — *"a gift for my girlfriend under $100"*, *"desk setup essentials under $60"* — and it picks from the store catalog, builds your cart, and takes you through a real PayPal sandbox checkout. Captured orders land in an AG Grid order history.
 
+![AI agent fills the cart in AG Grid](docs/screenshot-cart.jpg)
+
 ## How it works
 
 ```
@@ -19,9 +21,11 @@ You ──natural language──▶ AI agent ──structured cart──▶ Your
                                               Order history (AG Grid)
 ```
 
-1. **Agent** (`/api/agent`): an LLM parses your request against the product catalog and returns a full cart (OpenAI-compatible API; defaults to a free endpoint, no key required).
+1. **Agent** (`/api/agent`): an LLM parses your request against the product catalog and returns a full cart (OpenAI-compatible API; defaults to a free endpoint, no key required). If every LLM endpoint is unreachable, a catalog-grounded offline fallback builds the cart from local rules, so checkout demos never break.
 2. **Checkout** (`/api/paypal/order`, `/api/paypal/capture`): the server prices items from the catalog (client prices are never trusted), creates a PayPal order, and captures it after you approve in the sandbox flow.
 3. **Order history** (`/api/orders`): captured sandbox payments are stored locally and displayed in AG Grid.
+
+![Completed sandbox order in the order history grid](docs/screenshot-orders.jpg)
 
 ## Tech stack
 
