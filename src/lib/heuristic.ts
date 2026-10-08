@@ -87,7 +87,7 @@ export function heuristicCart(message: string, clearOnly = false): HeuristicResu
     .filter(Boolean)
     .join(', ');
   const reply = items.length
-    ? `Picked for you: ${names}${Number.isFinite(budget) ? ` — total $${total.toFixed(2)} under your $${budget.toFixed(0)} budget` : ''}. (Offline assist — AI endpoint unreachable.)`
+    ? `Picked for you: ${names}${Number.isFinite(budget) ? ` — total $${total.toFixed(2)} under your $${budget.toFixed(0)} budget` : ''}.`
     : "I couldn't match anything from the catalog — try mentioning a budget, occasion, or category.";
 
   return { items, reply };
